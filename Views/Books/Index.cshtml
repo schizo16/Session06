@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Session06.Models.Book>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    /* Custom CSS for table styling */
+    .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .custom-table th, .custom-table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .custom-table th {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .custom-table tbody tr:nth-child(even) {
+        background-color: #f8f9fa;
+    }
+
+    .custom-table tbody tr:hover {
+        background-color: #e9ecef;
+    }
+
+    .custom-table td.actions a {
+        margin-right: 5px;
+    }
+</style>
+
+<div class="container">
+    <h1 class="display-4 mb-4">Index</h1>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <a asp-action="Create" class="btn btn-primary">Create New</a>
+        </div>
+    </div>
+
+    <table class="custom-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Release</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Publisher</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.Author</td>
+                    <td>@item.Release</td>
+                    <td>@item.Price</td>
+                    <td>@item.Description</td>
+                    <td>@item.Category.CategoryId</td>
+                    <td>@item.Publisher.PublisherId</td>
+                    <td class="actions">
+                        <a asp-action="Edit" asp-route-id="@item.BookId" class="btn btn-primary">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.BookId" class="btn btn-info">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.BookId" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
